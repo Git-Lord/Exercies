@@ -63,3 +63,40 @@ class Paginator:
             if end_neighbours != self.count_pages:
                 result.append(self.create_page(self.count_pages))
         return result
+
+    def __str__(self):
+        """ Generates a string of html code like the following string
+              <ul class = "pagination">
+                  <li><a href="/page3/">←</a></li>
+                  <li><a href="/page1/">1</a></li>
+                  <li class="disabled"><a href="#">...</a></li>
+                  <li><a href="/page3/">3</a></li>
+                  <li class="active"><a href="/page4/">4</a></li>
+                  <li><a href="/page5/">5</a></li>
+                  <li class="disabled"><a href="#">...</a></li>
+                  <li><a href="/page10/">10</a></li>
+                  <li><a href="/page5/">→</a></li>
+              </ul>
+        """
+
+        # Creates a array, that describes the paginator
+        pages = self.create_paginator()
+        # Creates the string of a html code from that array
+        html = '<ul class = "pagination">\n{0}</ul> \n'
+        ul = ""
+        if self.previous_page() is not None:
+            ul += '\t\t<li><a href="{0}">←</a></li>\n'.format(self.generate_link(self.previous_page()))
+        for page in pages:
+            if page["link"] is not None:
+                if page["active"]:
+                    parameters = ' class="active"'
+                else:
+                    parameters = ''
+                href = page["link"]
+            else:
+                parameters = ' class="disabled"'
+                href = "#"
+            ul += '\t\t<li{1}><a href="{0}">{2}</a></li>\n'.format(href, parameters, str(page["number"]))
+        if self.next_page() is not None:
+            ul += '\t\t<li><a href="{0}">→</a></li>\n'.format(self.generate_link(self.next_page()))
+        return html.format(ul)
