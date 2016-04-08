@@ -1,5 +1,28 @@
 from main import Paginator
 
+generated_examples = [
+    Paginator(current_page=4, count_pages=8, pattern_url="/page_{{number}}/", max_pages=4),
+    Paginator(current_page=41, count_pages=100, pattern_url="/page_{{number}}/", max_pages=10),
+    Paginator(current_page=10, count_pages=10, pattern_url="/page_{{number}}/", max_pages=5)
+]
+
+generated_html = [
+    {
+        "result": Paginator(current_page=4, count_pages=10, pattern_url="/page{{number}}/", max_pages=5),
+        "expected": '<ul class = "pagination">'
+                    '<li><a href="/page3/">←</a></li>'
+                    '<li><a href="/page1/">1</a></li>'
+                    '<li class="disabled"><a href="#">...</a></li>'
+                    '<li><a href="/page3/">3</a></li>'
+                    '<li class="active"><a href="/page4/">4</a></li>'
+                    '<li><a href="/page5/">5</a></li>'
+                    '<li class="disabled"><a href="#">...</a></li>'
+                    '<li><a href="/page10/">10</a></li>'
+                    '<li><a href="/page5/">→</a></li>'
+                    '</ul> '
+    }
+]
+
 generated_pages = [
     {
         "result": Paginator(current_page=4, count_pages=10, pattern_url="/page{{number}}/", max_pages=5),
