@@ -1,0 +1,104 @@
+************* Module main
+C: 88, 0: Line too long (103/100) (line-too-long)
+C: 99, 0: Line too long (105/100) (line-too-long)
+C:  1, 0: Missing module docstring (missing-docstring)
+C: 16, 4: Missing method docstring (missing-docstring)
+C: 19, 4: Missing method docstring (missing-docstring)
+C: 25, 4: Missing method docstring (missing-docstring)
+C: 31, 4: Missing method docstring (missing-docstring)
+C: 35, 4: Missing method docstring (missing-docstring)
+R: 35, 4: Method could be a function (no-self-use)
+C: 86, 8: Invalid variable name "ul" (invalid-name)
+C: 88,12: Invalid variable name "ul" (invalid-name)
+C: 99,12: Invalid variable name "ul" (invalid-name)
+C:101,12: Invalid variable name "ul" (invalid-name)
+
+
+Report
+======
+56 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |NC         |NC         |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |NC         |NC         |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |8      |NC         |NC         |37.50       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |62     |59.62 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|docstring |26     |25.00 |NC       |NC         |
++----------+-------+------+---------+-----------+
+|comment   |5      |4.81  |NC       |NC         |
++----------+-------+------+---------+-----------+
+|empty     |11     |10.58 |NC       |NC         |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |NC       |NC         |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |NC       |NC         |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |12     |NC       |NC         |
++-----------+-------+---------+-----------+
+|refactor   |1      |NC       |NC         |
++-----------+-------+---------+-----------+
+|warning    |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+|error      |0      |NC       |NC         |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++------------------+------------+
+|message id        |occurrences |
++==================+============+
+|missing-docstring |6           |
++------------------+------------+
+|invalid-name      |4           |
++------------------+------------+
+|line-too-long     |2           |
++------------------+------------+
+|no-self-use       |1           |
++------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 7.68/10
