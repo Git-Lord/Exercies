@@ -11,10 +11,10 @@ SRCS = main.cpp helloworld.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #Используемый компилятор
-CC = g++
+CXX = g++
 
 #Параметры комплияции
-CFLAGS=-c
+CXXFLAGS=
 
 #Команды, которые не связаны с файлами
 .PHONY: all clean install uninstall
@@ -24,7 +24,7 @@ all: $(TARGET)
 
 #Линковка
 $(TARGET):  $(OBJS)
-			$(CC) $(OBJS) -o $(TARGET)
+			$(CXX) $(OBJS) -o $(TARGET)
 
 #Очистка директории
 clean:
@@ -33,6 +33,10 @@ clean:
 #Установка
 install:
 		install $(TARGET) $(PREFIX)
+
+#Явное указание правила конвертации .cpp -> .o
+.cpp.o:
+		$(CXX) $(CXXFLAGS) -c $< -o $@
 
 #Удаление
 uninstall:
