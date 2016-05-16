@@ -1,5 +1,3 @@
-#!/usr/local/bin/python
-#
 # -*- coding: utf-8 -*-
 
 import math
@@ -7,7 +5,9 @@ import math
 
 class Paginator:
     """ The main class, that creates a paginator: """
-    def __init__(self, current_page, count_pages, pattern_url="", max_pages=10):
+    def __init__(self, current_page, count_pages, max_pages, pattern_url=""):
+        if current_page > count_pages or current_page < 1:
+            raise Exception("The incorrect page number")
         self.current_page = current_page
         self.count_pages = count_pages
         self.pattern_url = pattern_url
@@ -48,20 +48,43 @@ class Paginator:
         ]
          """
         result = []
-        neighbours_length = math.floor((self.max_pages - 2) / 2.0)
-        start_neighbours = max(self.current_page - neighbours_length, 1)
-        end_neighbours = min(self.current_page + neighbours_length, self.count_pages)
-        if self.count_pages > 0:
-            if start_neighbours != 1:
+        number_pages = min(self.count_pages, self.max_pages)
+        left_trail = int(math.floor(number_pages/2))
+        right_trail = int(math.floor(number_pages/2))
+        if not number_pages % 2:
+            left_trail -= 1
+
+        left_shift = self.current_page - left_trail
+        if left_shift <= 0:
+            right_trail -= left_shift - 1
+            left_trail += left_shift
+
+        right_shift = self.current_page + right_trail
+        if right_shift > self.count_pages:
+            right_trail -= right_shift - self.count_pages 
+            left_trail += right_shift - self.count_pages 
+
+        if self.count_pages > 3:
+            start = self.current_page - left_trail
+            end = self.current_page + right_trail
+            if end != self.count_pages:
+                end -= 1
+            if start != 1:
+                start += 1
+            if start != 1:
                 result.append(self.create_page(1))
-            if start_neighbours > 2:
+            if start > 2:
                 result.append(self.create_divider())
-            for i in range(start_neighbours, end_neighbours+1):
+            for i in range(start, end+1):
                 result.append(self.create_page(i))
-            if end_neighbours < self.count_pages - 1:
+            if end < self.count_pages - 1:
                 result.append(self.create_divider())
-            if end_neighbours != self.count_pages:
+            if end != self.count_pages:
                 result.append(self.create_page(self.count_pages))
+        else:
+            for i in range(0, self.count_pages):
+                 result.append(self.create_page(i+1))
+
         return result
 
     def __str__(self):

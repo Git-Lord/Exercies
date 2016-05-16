@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import unittest
-from tests_cases import generated_pages, generated_html, generated_examples
+from tests_cases import *
 
 
 class PaginatorTest(unittest.TestCase):
