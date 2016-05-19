@@ -1,41 +1,20 @@
+#include <iostream>
 #include <stdlib.h>
-#include <limits.h>
+extern "C" int calculateMinimum(int len, int* array);
 
-extern "C" int calculateMinimum(int len, int* array) {
-	// Calculates the sum of the absolute values of array elements
-	int sum = 0;
-	for (int i = 0; i < len; i++) {
-		sum += abs(array[i]);
+int main(int argc, char **argv) {
+	int *array = new int[argc];
+	//There is no checking for errors, just for sake of my lovely time:
+	for (int i = 1; i < argc; i++) {
+		array[i] = atoi(argv[i]);
 	}
-
-	// Builds the array of sums, which realizability we will test:
-	int *available = new int[sum+1];
-	for (int i = 0; i < sum+1; i++) {
-		available[i] = false;
+	if (argc > 1) {
+		std::cout << "The sum: " << calculateMinimum(argc, array) << std::endl; 
 	}
-	available[0] = true;
-
-	// Checks the realizability of subsets sums:
-	for (int i = 0; i < len; i++) {
-		for (int j = sum - abs(array[i]); j >= 0; j--) {
-			if (available[j]) {
-				available[j + abs(array[i])] = true;
-			}
-		}
+	else {
+		std::cout << "No numbers were inputed :(" << std::endl;
 	}
-
-	int minimum = INT_MAX;
-
-	// Fo all sums:
-	for (int i = 0; i < sum; i++) {
-		// If sum is realizabile
-		if (available[i]) {
-			if (abs(sum - 2*i) < minimum) {
-                minimum = abs(sum - 2*i);
-			}
-		}
-	}
-
-	return minimum;
-
+	
 }
+
+//Compite: g++ main.cpp -o main -l:lib.so
